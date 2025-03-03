@@ -176,7 +176,7 @@ if uploaded_file is not None:
         status_text.text("Loading model (this may take a while for large models)...")
         
         with st.spinner("Loading model..."):
-            model = load_keras_model(tmp_filename, custom_objects_dict=custom_objects)
+            model = load_keras_model(tmp_filename)
 
         # Clean up temp file
         try:
