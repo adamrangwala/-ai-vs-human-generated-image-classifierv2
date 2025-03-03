@@ -38,26 +38,8 @@ def validate_file_size(file, max_size_mb=500):
         return False
     return True
 
-# Default custom objects code
-# Define your custom model components here
-# Example:
 
 """
-
-# Custom objects input
-with st.expander("Define Custom Objects (if your model uses custom layers)", expanded=False):
-    st.markdown("""
-    If your model uses custom layers or objects, define them below. These definitions will be used when loading the model.
-    Include all imports and class definitions needed for your model.
-    """)
-    
-    custom_objects_code = st.text_area(
-        "Custom Objects Code",
-        value=default_custom_objects_code,
-        height=300
-    )
-    
-    st.caption("Note: The code you enter here will be evaluated to load custom objects. Ensure it's properly formatted and secure.")
 
 # File uploader with size limit warning
 st.warning("Note: Large model files (>100MB) may cause memory issues. Consider using a smaller or quantized model.")
