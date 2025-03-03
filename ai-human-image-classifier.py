@@ -45,34 +45,9 @@ def validate_file_size(file, max_size_mb=500):
 st.warning("Note: Large model files (>100MB) may cause memory issues. Consider using a smaller or quantized model.")
 uploaded_file = st.file_uploader("Choose a model file", type=["keras", "h5"])
 
-def get_custom_objects_from_code(code_string):
-    """Evaluates the custom objects code and returns a dictionary of custom objects"""
-    custom_objects = {}
-    try:
-        # Create a local namespace
-        local_namespace = {}
-        
-        # Add tensorflow to the namespace
-        local_namespace['tf'] = tf
-        
-        # Execute the code in the local namespace
-        exec(code_string, globals(), local_namespace)
-        
-        # Find all custom layer classes in the namespace
-        for name, obj in local_namespace.items():
-            if (inspect.isclass(obj) and 
-                issubclass(obj, tf.keras.layers.Layer) and 
-                obj != tf.keras.layers.Layer):
-                custom_objects[name] = obj
-                
-        return custom_objects
-    except Exception as e:
-        st.error(f"Error in custom objects code: {str(e)}")
-        st.code(traceback.format_exc(), language="python")
-        return {}
 
 @st.cache_resource(show_spinner=False)
-def load_keras_model(model_path, custom_objects_dict=None):
+def load_keras_model(model_path):
     """Loads and caches the Keras model to prevent reloading on each interaction."""
     try:
         # Configure TensorFlow for memory efficiency
@@ -89,7 +64,7 @@ def load_keras_model(model_path, custom_objects_dict=None):
         
         # Try to load the model with CPU first for stability
         with tf.device('/CPU:0'):
-            model = load_model(model_path, custom_objects=custom_objects_dict)
+            model = load_model(model_path)
         
         return model
     except Exception as e:
