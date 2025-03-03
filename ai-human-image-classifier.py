@@ -41,7 +41,7 @@ def validate_file_size(file, max_size_mb=500):
 # Default custom objects code
 default_custom_objects_code = """# Define your custom model components here
 # Example:
-class CustomDataAugmentation(tf.keras.layers.Layer):
+'''class CustomDataAugmentation(tf.keras.layers.Layer):
     def __init__(self, **kwargs):
         super(CustomDataAugmentation, self).__init__(**kwargs)
     
@@ -54,7 +54,7 @@ class ResNetPreprocessingLayer(tf.keras.layers.Layer):
     
     def call(self, inputs):
         return inputs
-
+'''
 # You can define additional custom objects as needed
 """
 
