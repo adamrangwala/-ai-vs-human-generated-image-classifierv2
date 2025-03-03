@@ -130,13 +130,7 @@ if uploaded_file is not None:
         st.stop()
         
     try:
-        # Extract custom objects from code
-        with st.spinner("Processing custom objects..."):
-            custom_objects = get_custom_objects_from_code(custom_objects_code)
-            if custom_objects:
-                st.success(f"Found {len(custom_objects)} custom objects: {', '.join(custom_objects.keys())}")
-            else:
-                st.info("No custom objects found or defined. Using default model loading.")
+    
         
         # Progress indicator for model loading
         progress_bar = st.progress(0)
